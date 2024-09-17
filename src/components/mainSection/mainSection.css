@@ -1,7 +1,5 @@
 .mainSection {
   display: flex;
-  /* height: 85.6%; */
-  height: 100%;
 }
 
 .sectionOne {
@@ -12,5 +10,7 @@
   border-radius: 18px 0px 10px 0px;
   background-color: #e6e7eb;
   width: 100%;
+  min-height: 87.9vh;
+  overflow-y: auto;
   margin-left: 1.75rem;
 }

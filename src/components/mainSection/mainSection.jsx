@@ -1,4 +1,5 @@
 import SectionOne from "../sectionOne/sectionOne";
+import SectionTwo from "../sectionTwo/sectionTwo";
 import "./mainSection.css";
 
 function MainSection() {
@@ -7,7 +8,9 @@ function MainSection() {
       <section className="sectionOne">
         <SectionOne />
       </section>
-      <section className="sectionTwo"></section>
+      <section className="sectionTwo">
+        <SectionTwo />
+      </section>
     </section> 
   );
 }

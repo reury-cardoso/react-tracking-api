@@ -4,7 +4,7 @@ import { GalleryHorizontalEnd, Bolt, FileText } from 'lucide-react';
 function SectionOne() {
   return (
     <div className="stockOptions">
-      <div className="allPackets">
+      <div className="allPackets selectedOption">
         <GalleryHorizontalEnd size={24} />
         <span>Todos</span>
       </div>
@@ -12,7 +12,7 @@ function SectionOne() {
         <Bolt size={24} />
         <span>Gerenciar</span>
       </div>
-      <div className="reportAll selectedOption">
+      <div className="reportAll">
         <FileText size={24}/>
         <span>Relatório</span>
       </div>

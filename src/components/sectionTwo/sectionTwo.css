@@ -1,0 +1,51 @@
+#trackingMain {
+  padding: 1.3rem 1.5rem;
+}
+
+#InfoUp {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(112, 114, 118, 0.25);
+  padding-bottom: 1.3rem;
+  align-items: center;
+
+  #addButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #004fd7;
+    border: none;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #003ea6;
+
+    }
+  }
+}
+
+.trackingText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  span {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #363638;
+  }
+  p {
+    font-size: 0.9rem;
+    color: #363638;
+  }
+}
+
+#cardGallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem 1.5rem;
+  padding: 4rem 0 1.5625rem 0;
+}
