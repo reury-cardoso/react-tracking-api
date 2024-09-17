@@ -1,0 +1,23 @@
+.stockOptions {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+  padding: 2rem;
+  position: fixed;
+
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 2.5rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+}
+
+.selectedOption {
+  background: #004fd7;
+  color: #fff;
+}
