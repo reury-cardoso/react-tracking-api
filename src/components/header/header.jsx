@@ -7,7 +7,7 @@ function Header() {
     <header>
       <div className="logo">
         <Truck color="#004FD7"  size={24} />
-        <span>EcoTracking</span>
+        <span>HelpTracking</span>
       </div>
       <div className="secondarySection">
         <div className="searchField">

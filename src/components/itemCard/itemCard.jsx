@@ -1,22 +1,39 @@
+/* eslint-disable react/prop-types */
 import "./itemCard.css";
-import { Notebook, MapPin, Clock, CircleArrowOutUpRight } from "lucide-react";
+import Icon from "../icon/icon";
+import { FileSliders, Clock, CircleArrowOutUpRight } from "lucide-react";
+import { formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 
-function ItemCard() {
+function ItemCard({ card }) {
+  const cardStyle = JSON.parse(card.style);
+
   return (
     <div className="card">
-      <div className="cardIcon">
-        <Notebook className="icon" size={24} color="#fff" />
+      <div style={{background: `${cardStyle.color}`, filter: `drop-shadow(0px 10px 11px ${cardStyle.color})`}} className="cardIcon">
+        <Icon name={cardStyle.icon} />
       </div>
       <div className="cardBody">
-        <h1>Data Managers</h1>
+        <h1>{card.trackingCode}</h1>
         <div className="cardBodyPlus">
           <div className="cardBPIcons">
-            <MapPin size={19} color="#707276" />
-            <span>Em transferência para Belém</span>
+            <FileSliders size={19} color="#707276" />
+            <span>{card.status}</span>
           </div>
           <div className="cardBPIcons">
             <Clock size={19} color="#707276" />
-            <span>Há 5 dias</span>
+            <span>
+              {formatDistanceToNow(card.createdAt, {
+                locale: ptBR,
+                addSuffix: true,
+              })
+                .charAt(0)
+                .toUpperCase() +
+                formatDistanceToNow(card.createdAt, {
+                  locale: ptBR,
+                  addSuffix: true,
+                }).slice(1)}
+            </span>
           </div>
         </div>
       </div>

@@ -1,0 +1,63 @@
+#trackingDetails {
+  padding: 1.5625rem;
+}
+
+.pageNavigation {
+  ul {
+    display: flex;
+    justify-content: start;
+    list-style-type: none;
+    gap: 0.4rem;
+  }
+
+  li {
+    &:not(:last-child)::after {
+      content: ">";
+      margin-left: 0.5rem;
+    }
+
+    a {
+      color: #000;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #e5e5e5;
+      }
+    }
+  }
+}
+
+#details {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+
+}
+
+.itemDetail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5625rem 2.1875rem;
+  border-radius: 14px;
+  border: 2px solid #004fd7;
+  background: #fff;
+  box-shadow: 0px 4px 4px rgba(5, 17, 107, 0.25);
+  margin: 3rem 0;
+  width: 100%;
+}
+
+.lineDetails {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex-direction: column;
+  font-weight: 600;
+}
+
