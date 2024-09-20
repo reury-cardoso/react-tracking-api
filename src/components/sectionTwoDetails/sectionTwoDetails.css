@@ -144,11 +144,19 @@
   font-weight: 700;
   gap: 0.5rem;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease;
 
   &:hover {
-    background: #0e9e82 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
+
+  > .editPencil {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.09);
+    }
+  } 
 }
 
 .small-map {

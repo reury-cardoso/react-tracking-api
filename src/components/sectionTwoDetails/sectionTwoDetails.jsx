@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import HistoryCard from "./historyCard/historyCard";
 import { format } from "date-fns";
 
-function SectionTwoDetails({cardDetails, setViewButton}) {
+function SectionTwoDetails({cardDetails, setViewButton, deleteCard}) {
   const latLon = cardDetails.addressLatLon.split(',');
 
   const lat = parseFloat(latLon[0]);
@@ -20,7 +20,7 @@ function SectionTwoDetails({cardDetails, setViewButton}) {
             <button onClick={() => setViewButton(false)}>Todos</button>
           </li>
           <li>
-            <button >{cardDetails.trackingCode}</button>
+            <button onClick={() => window.location.reload(true)} >{cardDetails.trackingCode}</button>
           </li>
         </ul>
       </nav>
@@ -61,9 +61,9 @@ function SectionTwoDetails({cardDetails, setViewButton}) {
             </div>
             <div className="divDetail">
               <span>Status</span>
-              <div style={{ background: "#14C3A4" }} className="statusCard">
+              <div style={{ background: cardDetails.styleColor }} className="statusCard">
               {cardDetails.status}
-                <Pencil size={20} color="#fff" />
+                <Pencil className="editPencil" size={20} color="#fff" />
               </div>
             </div>
             <div className="divDetail divDetailData">
@@ -96,15 +96,17 @@ function SectionTwoDetails({cardDetails, setViewButton}) {
           <button className="buttonEdit iconCRUD">
             <Pencil size={24} color="#fff" />
           </button>
-          <button className="buttonDelete iconCRUD">
+          <button onClick={()=> {
+            deleteCard(cardDetails.id);
+          }} className="buttonDelete iconCRUD">
             <Trash size={24} color="#fff" />
           </button>
         </div>
       </section>
       <section id="history">
         <span>Ultimas atualizações</span>
-        {cardDetails.history.map((history, index) => {
-          return <HistoryCard key={index} history={history} icon={cardDetails.styleIcon} color={cardDetails.styleColor} />;
+        {cardDetails.history.toReversed().map((history, index) => {
+          return <HistoryCard key={index} history={history}/>;
         })}
       </section>
     </main>

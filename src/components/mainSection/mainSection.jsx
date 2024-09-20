@@ -21,6 +21,11 @@ function MainSection() {
     setViewButton(true);
   }
 
+  async function deleteCard(id) {
+    await axios.delete(`http://localhost:3000/${id}`);
+    getCards();
+  }
+
   useEffect(() => {
     getCards();
   }, []);
@@ -32,9 +37,13 @@ function MainSection() {
       </section>
       <section className="sectionTwo">
         {viewbutton ? (
-          <SectionTwoDetails setViewButton={setViewButton} cardDetails={cardDetails} />
+          <SectionTwoDetails
+            setViewButton={setViewButton}
+            cardDetails={cardDetails}
+            deleteCard={deleteCard} 
+          />
         ) : (
-          <SectionTwo cardsApi={cardsApi} getCardDetails={getCardDetails} />
+          <SectionTwo cardsApi={cardsApi} getCardDetails={getCardDetails}/>
         )}
       </section>
     </section>

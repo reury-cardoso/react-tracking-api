@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { HardDriveDownload, FolderClock,  CircleCheck, MapPinCheck, TextSearch} from "lucide-react";
+import { HardDriveDownload, FolderClock,  CircleCheck, MapPinCheck, TextSearch, TicketX} from "lucide-react";
 
 function Icon({ name, color }) {
   switch (name) {
@@ -13,6 +13,8 @@ function Icon({ name, color }) {
       return <MapPinCheck size={24} color={color} />;
     case "TextSearch":
       return <TextSearch size={24} color={color} />;
+    case "TicketX":
+      return <TicketX size={24} color={color} />;
     default:
       return <HardDriveDownload size={24} color={color} />;
   }

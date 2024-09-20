@@ -1,7 +1,7 @@
 .historyText {
   display: flex;
   align-items: center;
-  gap: .8rem;
+  gap: 0.8rem;
   > .textHis span {
     color: #1e1e1e;
     font-size: 1rem;
@@ -26,4 +26,6 @@
 .historyStatus div {
   padding: 0.5rem 1rem;
   border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
 }
