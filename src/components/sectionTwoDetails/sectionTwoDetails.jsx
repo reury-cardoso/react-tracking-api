@@ -6,8 +6,14 @@ import "leaflet/dist/leaflet.css";
 import HistoryCard from "./historyCard/historyCard";
 import { format } from "date-fns";
 
-function SectionTwoDetails({cardDetails, setViewButton, deleteCard}) {
-  const latLon = cardDetails.addressLatLon.split(',');
+function SectionTwoDetails({
+  cardDetails,
+  setViewButton,
+  deleteCard,
+  setTagSelected,
+  showNotification,
+}) {
+  const latLon = cardDetails.addressLatLon.split(",");
 
   const lat = parseFloat(latLon[0]);
   const lon = parseFloat(latLon[1]);
@@ -17,10 +23,19 @@ function SectionTwoDetails({cardDetails, setViewButton, deleteCard}) {
       <nav className="pageNavigation">
         <ul>
           <li>
-            <button onClick={() => setViewButton(false)}>Todos</button>
+            <button
+              onClick={() => {
+                setViewButton(false);
+                setTagSelected(1);
+              }}
+            >
+              Todos
+            </button>
           </li>
           <li>
-            <button onClick={() => window.location.reload(true)} >{cardDetails.trackingCode}</button>
+            <button onClick={() => window.location.reload(true)}>
+              {cardDetails.trackingCode}
+            </button>
           </li>
         </ul>
       </nav>
@@ -52,17 +67,24 @@ function SectionTwoDetails({cardDetails, setViewButton, deleteCard}) {
               </div>
               <div className="createData">
                 <span>Criado em:</span>
-                <p>{format(new Date(cardDetails.createdAt), 'dd/MM/yyyy HH:mm')}</p>
+                <p>
+                  {format(new Date(cardDetails.createdAt), "dd/MM/yyyy HH:mm")}
+                </p>
               </div>
               <div className="updateData">
                 <span>Atualização:</span>
-                <p>{format(new Date(cardDetails.updatedAt), 'dd/MM/yyyy HH:mm')}</p>
+                <p>
+                  {format(new Date(cardDetails.updatedAt), "dd/MM/yyyy HH:mm")}
+                </p>
               </div>
             </div>
             <div className="divDetail">
               <span>Status</span>
-              <div style={{ background: cardDetails.styleColor }} className="statusCard">
-              {cardDetails.status}
+              <div
+                style={{ background: cardDetails.styleColor }}
+                className="statusCard"
+              >
+                {cardDetails.status}
                 <Pencil className="editPencil" size={20} color="#fff" />
               </div>
             </div>
@@ -86,9 +108,7 @@ function SectionTwoDetails({cardDetails, setViewButton, deleteCard}) {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={[lat, lon]}>
-              <Popup>
-                {cardDetails.address}
-              </Popup>
+              <Popup>{cardDetails.address}</Popup>
             </Marker>
           </MapContainer>
         </div>
@@ -96,9 +116,17 @@ function SectionTwoDetails({cardDetails, setViewButton, deleteCard}) {
           <button className="buttonEdit iconCRUD">
             <Pencil size={24} color="#fff" />
           </button>
-          <button onClick={()=> {
-            deleteCard(cardDetails.id);
-          }} className="buttonDelete iconCRUD">
+          <button
+            onClick={() => {
+              if (window.confirm("Deseja realmente deletar este registro?")) {
+                deleteCard(cardDetails.id);
+                showNotification("success", "Registro deletado com sucesso");
+                setViewButton(false);
+                setTagSelected(1);
+              }
+            }}
+            className="buttonDelete iconCRUD"
+          >
             <Trash size={24} color="#fff" />
           </button>
         </div>
@@ -106,7 +134,7 @@ function SectionTwoDetails({cardDetails, setViewButton, deleteCard}) {
       <section id="history">
         <span>Ultimas atualizações</span>
         {cardDetails.history.toReversed().map((history, index) => {
-          return <HistoryCard key={index} history={history}/>;
+          return <HistoryCard key={index} history={history} />;
         })}
       </section>
     </main>

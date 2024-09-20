@@ -14,3 +14,25 @@
   overflow-y: auto;
   margin-left: 1.75rem;
 }
+
+.fade-enter {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  transition: opacity 0.5s ease-in;
+}
+
+.fade-enter-active {
+  opacity: 1;
+}
+
+.fade-exit {
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-exit-active {
+  opacity: 0;
+}

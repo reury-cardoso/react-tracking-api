@@ -6,6 +6,13 @@
   padding: 2rem;
   position: fixed;
 
+  .management {
+    color: #a9a9a9;
+    cursor: not-allowed;
+    &:hover {
+      background-color: inherit;
+    }
+  }
 
   div {
     display: flex;
@@ -23,8 +30,9 @@
 }
 
 .selectedOption {
-  background-color: #004fd7;
-  color: #fff;
+  background-color: #004fd7 !important;
+  color: #fff !important;
+  cursor: pointer !important;
   &:hover {
     background-color: #0445b4 !important;
   }
