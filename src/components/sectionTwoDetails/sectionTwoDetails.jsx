@@ -1,18 +1,26 @@
+/* eslint-disable react/prop-types */
 import "./sectionTwoDetails.css";
 import { Info, Pencil, Trash } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import HistoryCard from "./historyCard/historyCard";
+import { format } from "date-fns";
 
-function SectionTwoDetails() {
+function SectionTwoDetails({cardDetails, setViewButton}) {
+  const latLon = cardDetails.addressLatLon.split(',');
+
+  const lat = parseFloat(latLon[0]);
+  const lon = parseFloat(latLon[1]);
+
   return (
     <main id="trackingDetails">
       <nav className="pageNavigation">
         <ul>
           <li>
-            <a href="index.html">Todos</a>
+            <button onClick={() => setViewButton(false)}>Todos</button>
           </li>
           <li>
-            <a href="index.html">PDA103920DEV</a>
+            <button >{cardDetails.trackingCode}</button>
           </li>
         </ul>
       </nav>
@@ -24,12 +32,12 @@ function SectionTwoDetails() {
               <div className="detailsProfile">
                 <img
                   width={40}
-                  src="https://api.dicebear.com/9.x/initials/svg?seed=Ana Pinho&radius=50&backgroundType=gradientLinear&fontFamily=Arial&fontWeight=600"
+                  src={`https://api.dicebear.com/9.x/initials/svg?seed=${cardDetails.applicantName}&radius=50&backgroundType=gradientLinear&fontFamily=Arial&fontWeight=600`}
                   alt=""
                 />
                 <div className="profileText">
-                  <span>Ana Pinho</span>
-                  <p>Solicitante #REG103845</p>
+                  <span>{cardDetails.applicantName}</span>
+                  <p>Solicitante #{cardDetails.trackingCode}</p>
                 </div>
               </div>
             </div>
@@ -40,28 +48,28 @@ function SectionTwoDetails() {
               <span>Dados</span>
               <div className="typeHelp">
                 <span>Tipo de Ajuda:</span>
-                <p>Dinheiro</p>
+                <p>{cardDetails.supportType}</p>
               </div>
               <div className="createData">
                 <span>Criado em:</span>
-                <p>14/09/2021</p>
+                <p>{format(new Date(cardDetails.createdAt), 'dd/MM/yyyy HH:mm')}</p>
               </div>
               <div className="updateData">
-                <span>Atualizado em:</span>
-                <p>14/09/2021</p>
+                <span>Atualização:</span>
+                <p>{format(new Date(cardDetails.updatedAt), 'dd/MM/yyyy HH:mm')}</p>
               </div>
             </div>
             <div className="divDetail">
               <span>Status</span>
               <div style={{ background: "#14C3A4" }} className="statusCard">
-                Aprovado 
+              {cardDetails.status}
                 <Pencil size={20} color="#fff" />
               </div>
             </div>
             <div className="divDetail divDetailData">
               <span>Endereço</span>
               <div className="typeHelp">
-                <p>Rua Siqueira Mendes, 190, Centro - Abaetetuba</p>
+                <p>{cardDetails.address}</p>
               </div>
             </div>
           </div>
@@ -69,7 +77,7 @@ function SectionTwoDetails() {
         <div className="itemDetailTwo itemDetail">
           <MapContainer
             className="small-map"
-            center={[-1.7252526, -48.8900453]}
+            center={[lat, lon]}
             zoom={13}
             scrollWheelZoom={false}
           >
@@ -77,20 +85,27 @@ function SectionTwoDetails() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[-1.7252526, -48.8900453]}>
+            <Marker position={[lat, lon]}>
               <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
+                {cardDetails.address}
               </Popup>
             </Marker>
           </MapContainer>
         </div>
         <div className="itemDetailThree itemDetail">
-          <button className="buttonEdit iconCRUD"><Pencil  size={24} color="#fff" /></button>
-          <button className="buttonDelete iconCRUD"><Trash  size={24} color="#fff" /></button>
+          <button className="buttonEdit iconCRUD">
+            <Pencil size={24} color="#fff" />
+          </button>
+          <button className="buttonDelete iconCRUD">
+            <Trash size={24} color="#fff" />
+          </button>
         </div>
       </section>
       <section id="history">
-        
+        <span>Ultimas atualizações</span>
+        {cardDetails.history.map((history, index) => {
+          return <HistoryCard key={index} history={history} icon={cardDetails.styleIcon} color={cardDetails.styleColor} />;
+        })}
       </section>
     </main>
   );

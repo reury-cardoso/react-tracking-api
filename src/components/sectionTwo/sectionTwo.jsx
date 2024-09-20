@@ -1,20 +1,9 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
 import ItemCard from "../itemCard/itemCard";
 import "./sectionTwo.css";
 import { Plus } from "lucide-react";
-import axios from "axios";
 
-function SectionTwo() {
-  const [ cardsApi, setCardsApi ] = useState();
-
-  async function getCards() {
-    const response = await axios.get('http://localhost:3000/');
-    setCardsApi(response.data.trackings);
-  }
-
-  useEffect(() => {
-    getCards();
-  }, []);
+function SectionTwo({cardsApi, getCardDetails}) {
 
   return (
     <main id="trackingMain">
@@ -28,7 +17,7 @@ function SectionTwo() {
         </button>
       </div>
       <div id="cardGallery">
-        { cardsApi && cardsApi.map((card, index) => <ItemCard key={index} card={card} />) }
+        { cardsApi && cardsApi.map((card, index) => <ItemCard key={index} card={card} getCardDetails={getCardDetails} />) }
       </div>
     </main>
   );

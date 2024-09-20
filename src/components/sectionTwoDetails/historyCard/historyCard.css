@@ -1,0 +1,29 @@
+.historyText {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  > .textHis span {
+    color: #1e1e1e;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  > .textHis p {
+    color: #8b8b8b;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
+
+.historyDate {
+  span {
+    color: #8b8b8b;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
+
+.historyStatus div {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}

@@ -5,13 +5,11 @@ import { FileSliders, Clock, CircleArrowOutUpRight } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 
-function ItemCard({ card }) {
-  const cardStyle = JSON.parse(card.style);
-
+function ItemCard({ card, getCardDetails }) {
   return (
     <div className="card">
-      <div style={{background: `${cardStyle.color}`, filter: `drop-shadow(0px 10px 11px ${cardStyle.color})`}} className="cardIcon">
-        <Icon name={cardStyle.icon} />
+      <div style={{background: `${card.styleColor}`, filter: `drop-shadow(0px 10px 11px ${card.styleColor})`}} className="cardIcon">
+        <Icon name={card.styleIcon} color={'#fff'} />
       </div>
       <div className="cardBody">
         <h1>{card.trackingCode}</h1>
@@ -37,7 +35,7 @@ function ItemCard({ card }) {
           </div>
         </div>
       </div>
-      <button id="manageTracking">
+      <button onClick={() => getCardDetails(card.trackingCode)} id="manageTracking">
         Visualizar <CircleArrowOutUpRight size={16} color="#fff" />
       </button>
     </div>
