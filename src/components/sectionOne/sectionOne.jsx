@@ -2,10 +2,13 @@
 import "./sectionOne.css";
 import { GalleryHorizontalEnd, Bolt, FileText } from 'lucide-react';
 
-function SectionOne({tagSelected}) {
+function SectionOne({tagSelected, setViewButton, setTagSelected}) {
   return (
     <div className="stockOptions">
-      <div className={`allPackets ${tagSelected == '1' ? 'selectedOption' : ''}`}>
+      <div onClick={()=> {
+        setViewButton(false);
+        setTagSelected('1');
+      }} className={`allPackets ${tagSelected == '1' ? 'selectedOption' : ''}`}>
         <GalleryHorizontalEnd size={24} />
         <span>Todos</span>
       </div>

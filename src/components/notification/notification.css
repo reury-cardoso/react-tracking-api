@@ -9,6 +9,7 @@
   transform: translateY(-20px);
   animation: slideIn 0.5s forwards;
   transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 99999;
 }
 
 .notification.success {

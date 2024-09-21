@@ -1,0 +1,114 @@
+.modal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 999;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.5s ease;
+  opacity: 0; 
+  pointer-events: none;
+}
+.display-block {
+  opacity: 1; /* Fica visível */
+  pointer-events: auto; /* Permite interação */
+}
+
+.display-none {
+  opacity: 0; /* Fica invisível */
+}
+
+
+.modalMain {
+  border-radius: 8px;
+  border: 3px solid #3173ed;
+  background: #fff;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  > .modalText {
+    text-align: center;
+    color: #333;
+    p {
+      font-size: 15px;
+      font-weight: 400;
+      margin-top: 10px;
+    }
+    span {
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+  }
+}
+
+.container label {
+  display: block;
+  text-align: left;
+  margin-top: 20px;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
+.container input,
+.container select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.container input:focus,
+.container select:focus {
+  border-color: #007bff;
+}
+
+.container .error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.divButtons {
+  display: flex;
+  gap: 10px;
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #004fd7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #003ea6;
+    }
+  }
+}
+
+#stopProcess {
+  width: 30%;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+
+  &:hover {
+    background-color: #e2c3c6;
+  }
+}

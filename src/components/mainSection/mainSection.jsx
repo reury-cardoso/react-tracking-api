@@ -13,26 +13,60 @@ function MainSection() {
   const [viewbutton, setViewButton] = useState(false);
   const [tagSelected, setTagSelected] = useState("1");
   const [notification, setNotification] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  function openModal() {
+    setShowModal(true);
+  }
+
+  function closeModal() {
+    setShowModal(false);
+  }
 
   function showNotification(type, message) {
     setNotification({ type, message });
   }
 
+  async function createCard(data) {
+    try {
+      await axios.post("http://localhost:3000/", data);
+      showNotification("success", "Registro criado com sucesso");
+      getCards();
+      closeModal();
+      setLoading(false);
+    } catch {
+      showNotification("error", "Erro ao criar registro");
+    }
+  }
+
   async function getCards() {
-    const response = await axios.get("http://localhost:3000/");
-    setCardsApi(response.data.trackings);
+    try {
+      const response = await axios.get("http://localhost:3000/");
+      setCardsApi(response.data.trackings);
+    } catch {
+      showNotification("error", "Erro ao buscar dados");
+    }
   }
 
   async function getCardDetails(trackingCode) {
-    const response = await axios.get(`http://localhost:3000/${trackingCode}`);
-    setCardDetails(response.data.tracking);
-    setViewButton(true);
-    setTagSelected(2);
+    try {
+      const response = await axios.get(`http://localhost:3000/${trackingCode}`);
+      setCardDetails(response.data.tracking);
+      setViewButton(true);
+      setTagSelected(2);
+    } catch {
+      showNotification("error", "Erro ao buscar detalhes");
+    }
   }
 
   async function deleteCard(id) {
-    await axios.delete(`http://localhost:3000/${id}`);
-    getCards();
+    try {
+      await axios.delete(`http://localhost:3000/${id}`);
+      getCards();
+    } catch {
+      showNotification("error", "Erro ao deletar registro");
+    }
   }
 
   useEffect(() => {
@@ -42,7 +76,11 @@ function MainSection() {
   return (
     <section className="mainSection">
       <section className="sectionOne">
-        <SectionOne tagSelected={tagSelected} />
+        <SectionOne
+          setViewButton={setViewButton}
+          setTagSelected={setTagSelected}
+          tagSelected={tagSelected}
+        />
       </section>
       <section className="sectionTwo">
         <div style={{ position: "relative", minHeight: "200px" }}>
@@ -62,6 +100,13 @@ function MainSection() {
                 <SectionTwo
                   cardsApi={cardsApi}
                   getCardDetails={getCardDetails}
+                  showNotification={showNotification}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                  showModal={showModal}
+                  createCard={createCard}
+                  loading={loading}
+                  setLoading={setLoading}
                 />
               </CSSTransition>
             )}
