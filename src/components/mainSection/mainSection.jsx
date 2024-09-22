@@ -35,8 +35,11 @@ function MainSection() {
       getCards();
       closeModal();
       setLoading(false);
+      return true;
     } catch {
       showNotification("error", "Erro ao criar registro");
+      setLoading(false);
+      return false;
     }
   }
 

@@ -10,7 +10,7 @@ function InputsModal({ showModal, closeModal, createCard, loading, setLoading })
 
   const [inputError, setInputError] = useState([]);
 
-  function createNewCard() {
+  async function createNewCard() {
     function validateInput() {
       let error = [];
 
@@ -26,11 +26,15 @@ function InputsModal({ showModal, closeModal, createCard, loading, setLoading })
 
     setLoading(true);
 
-    createCard({
+    const create = await createCard({
       applicantName: personalName,
       supportType: typeHelp,
       address,
     });
+
+    if(!create) {
+      return;
+    }
 
     setPersonalName("");
     setTypeHelp("");
