@@ -48,7 +48,7 @@ function SectionTwoDetails(props, ref) {
     try {
       setSelectedStatus(status);
       setIsLoading(true);
-      await axios.post(`http://localhost:3000/${id}/history`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/${id}/history`, {
         stage: status,
       });
       getCardDetails(cardDetails.trackingCode);

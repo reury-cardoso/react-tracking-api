@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from "react";
 import SectionOne from "../sectionOne/sectionOne";
 import SectionTwo from "../sectionTwo/sectionTwo";
@@ -21,7 +22,7 @@ function MainSection() {
   const [countAll, setCountAll] = useState();
 
   async function getCountAll() {
-    const response = await axios.get("http://localhost:3000/all/counter");
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/all/counter`);
     setCountAll(response.data.count);
   }
 
@@ -39,7 +40,7 @@ function MainSection() {
 
   async function createCard(data) {
     try {
-      await axios.post("http://localhost:3000/", data);
+      await axios.post(`${import.meta.env.VITE_API_URL}/`, data);
       showNotification("success", "Registro criado com sucesso");
       getCards();
       closeModal();
@@ -55,7 +56,7 @@ function MainSection() {
 
   async function getCards() {
     try {
-      const response = await axios.get("http://localhost:3000/");
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/`);
       setCardsApi(response.data.trackings);
     } catch {
       showNotification("error", "Erro ao buscar dados");
@@ -64,7 +65,7 @@ function MainSection() {
 
   async function getCardDetails(trackingCode) {
     try {
-      const response = await axios.get(`http://localhost:3000/${trackingCode}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/${trackingCode}`);
       setCardDetails(response.data.tracking);
       setViewButton(true);
       setTagSelected(2);
@@ -76,7 +77,7 @@ function MainSection() {
 
   async function updateCard(id, data, trackingCode) {
     try {
-      await axios.put(`http://localhost:3000/${id}`, data);
+      await axios.put(`${import.meta.env.VITE_API_URL}/${id}`, data);
       showNotification("success", "Registro editado com sucesso");
       getCardDetails(trackingCode);
       closeModal();
@@ -91,7 +92,7 @@ function MainSection() {
 
   async function deleteCard(id) {
     try {
-      await axios.delete(`http://localhost:3000/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/${id}`);
       getCards();
       getCountAll()
     } catch {
