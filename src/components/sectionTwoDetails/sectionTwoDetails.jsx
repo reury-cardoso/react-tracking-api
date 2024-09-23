@@ -60,7 +60,7 @@ function SectionTwoDetails(props, ref) {
       if (error.response.data.error !== "History already exists") {
         showNotification("error", "Erro ao atualizar");
       }
-      showNotification("warning", "O Pedido já passou por este status");
+      showNotification("warning", "Este status já foi atribuído ao auxílio anteriormente");
       setIsLoading(false);
       setIsOpen(false);
     }
