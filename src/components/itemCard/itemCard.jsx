@@ -8,8 +8,14 @@ import ptBR from "date-fns/locale/pt-BR";
 function ItemCard({ card, getCardDetails }) {
   return (
     <div className="card">
-      <div style={{background: `${card.styleColor}`, filter: `drop-shadow(0px 10px 11px ${card.styleColor})`}} className="cardIcon">
-        <Icon name={card.styleIcon} color={'#fff'} />
+      <div
+        style={{
+          background: `${card.styleColor}`,
+          filter: `drop-shadow(0px 10px 11px ${card.styleColor})`,
+        }}
+        className="cardIcon"
+      >
+        <Icon name={card.styleIcon} color={"#fff"} />
       </div>
       <div className="cardBody">
         <h1>{card.trackingCode}</h1>
@@ -35,7 +41,10 @@ function ItemCard({ card, getCardDetails }) {
           </div>
         </div>
       </div>
-      <button onClick={() => getCardDetails(card.trackingCode)} id="manageTracking">
+      <button
+        onClick={() => getCardDetails(card.trackingCode)}
+        id="manageTracking"
+      >
         Visualizar <CircleArrowOutUpRight size={16} color="#fff" />
       </button>
     </div>

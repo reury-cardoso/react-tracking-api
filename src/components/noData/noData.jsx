@@ -8,6 +8,6 @@ function NoData() {
       <p>Nenhum dado encontrado</p>
     </div>
   );
-};
+}
 
 export default NoData;

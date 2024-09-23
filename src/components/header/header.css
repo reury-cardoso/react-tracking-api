@@ -3,7 +3,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 3rem;
-  
 }
 
 .logo {
@@ -43,7 +42,7 @@ header {
     }
 
     input:focus {
-      border: 1px solid #004FD7;
+      border: 1px solid #004fd7;
     }
   }
 

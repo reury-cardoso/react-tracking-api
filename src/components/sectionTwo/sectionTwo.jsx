@@ -4,10 +4,21 @@ import ItemCard from "../itemCard/itemCard";
 import NoData from "../noData/noData";
 import "./sectionTwo.css";
 import { Plus } from "lucide-react";
+import { forwardRef } from 'react';
 
-function SectionTwo({cardsApi, getCardDetails, openModal, closeModal, showModal, createCard, loading, setLoading}) {
+function SectionTwo(props, ref) {
+  const {
+    cardsApi,
+    getCardDetails,
+    openModal,
+    closeModal,
+    showModal,
+    createCard,
+    loading,
+    setLoading,
+  } = props;
   return (
-    <main id="trackingMain">
+    <main ref={ref} id="trackingMain">
       <div id="InfoUp">
         <div className="trackingText">
           <span>Acompanhar</span>
@@ -18,11 +29,25 @@ function SectionTwo({cardsApi, getCardDetails, openModal, closeModal, showModal,
         </button>
       </div>
       <div id="cardGallery">
-        { cardsApi && cardsApi.length > 0 ?  cardsApi.map((card, index) => <ItemCard key={index} card={card} getCardDetails={getCardDetails} />) : <NoData />}
+        {cardsApi && cardsApi.length > 0 ? (
+          cardsApi.map((card, index) => (
+            <ItemCard key={index} card={card} getCardDetails={getCardDetails} />
+          ))
+        ) : (
+          <NoData />
+        )}
       </div>
-      <InputsModal closeModal={closeModal}  showModal={showModal} createCard={createCard} loading={loading} setLoading={setLoading}/>
+      <InputsModal
+        closeModal={closeModal}
+        showModal={showModal}
+        createCard={createCard}
+        loading={loading}
+        setLoading={setLoading}
+        isEdit={false}
+        cardDetails={undefined}
+      />
     </main>
   );
 }
 
-export default SectionTwo;
+export default forwardRef(SectionTwo);

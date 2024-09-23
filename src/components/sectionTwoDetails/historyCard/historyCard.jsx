@@ -26,9 +26,7 @@ function HistoryCard({ history }) {
         </span>
       </div>
       <div className="historyStatus">
-        <div style={{ background: history.color }}>
-          {history.stage}
-        </div>
+        <div style={{ background: history.color }}>{history.stage}</div>
       </div>
     </div>
   );

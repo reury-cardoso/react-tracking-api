@@ -7,7 +7,7 @@ function Notification({ type, message, onClose }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setFadeOut(true); 
+      setFadeOut(true);
       setTimeout(onClose, 500);
     }, 3000);
 
@@ -15,8 +15,16 @@ function Notification({ type, message, onClose }) {
   }, [onClose]);
 
   return (
-    <div className={`notification ${type} ${fadeOut ? 'fade-out' : ''}`}>
-      <i className={`fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle'}`}></i>
+    <div className={`notification ${type} ${fadeOut ? "fade-out" : ""}`}>
+      <i
+        className={`fas ${
+          type === "success"
+            ? "fa-check-circle"
+            : type === "error"
+            ? "fa-exclamation-circle"
+            : "fa-exclamation-triangle"
+        }`}
+      ></i>
       <span className="message">{message}</span>
     </div>
   );

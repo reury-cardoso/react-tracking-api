@@ -4,27 +4,81 @@ import { Info, Pencil, Trash } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import HistoryCard from "./historyCard/historyCard";
+import iconLoading from "../../assets/tubeSpinner.svg";
 import { format } from "date-fns";
+import { useState } from "react";
+import axios from "axios";
+import InputsModal from "../inputsModal/inputsModal";
+import { forwardRef } from 'react';
 
-function SectionTwoDetails({
-  cardDetails,
-  setViewButton,
-  deleteCard,
-  setTagSelected,
-  showNotification,
-}) {
+const statusName = [
+  "Recebido",
+  "Em análise",
+  "Aprovado",
+  "Auxílio Entregue",
+  "Negado",
+];
+
+function SectionTwoDetails(props, ref) {
+  const {
+    setViewButton,
+    cardDetails,
+    deleteCard,
+    setTagSelected,
+    showNotification,
+    getCardDetails,
+    getCards,
+    openModal,
+    closeModal,
+    showModal,
+    createCard,
+    loading,
+    setLoading,
+    updateCard,
+  } = props;
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState(cardDetails.status);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function toggleDropdown() {
+    setIsOpen(!isOpen);
+  }
+
+  async function handleOptionClick(status, id) {
+    try {
+      setSelectedStatus(status);
+      setIsLoading(true);
+      await axios.post(`http://localhost:3000/${id}/history`, {
+        stage: status,
+      });
+      getCardDetails(cardDetails.trackingCode);
+      setIsLoading(false);
+      setIsOpen(false);
+    } catch (error) {
+      console.log(error);
+      setSelectedStatus(cardDetails.status);
+      if (error.response.data.error !== "History already exists") {
+        showNotification("error", "Erro ao atualizar");
+      }
+      showNotification("warning", "O Pedido já passou por este status");
+      setIsLoading(false);
+      setIsOpen(false);
+    }
+  }
+
   const latLon = cardDetails.addressLatLon.split(",");
 
   const lat = parseFloat(latLon[0]);
   const lon = parseFloat(latLon[1]);
 
   return (
-    <main id="trackingDetails">
+    <main ref={ref} id="trackingDetails">
       <nav className="pageNavigation">
         <ul>
           <li>
             <button
               onClick={() => {
+                getCards();
                 setViewButton(false);
                 setTagSelected(1);
               }}
@@ -80,12 +134,45 @@ function SectionTwoDetails({
             </div>
             <div className="divDetail">
               <span>Status</span>
-              <div
-                style={{ background: cardDetails.styleColor }}
-                className="statusCard"
-              >
-                {cardDetails.status}
-                <Pencil className="editPencil" size={20} color="#fff" />
+              <div className="statusDropdown">
+                <div
+                  className="statusMain"
+                  style={{ background: cardDetails.styleColor }}
+                  onClick={toggleDropdown}
+                >
+                  {isLoading ? (
+                    <img height={14} src={iconLoading} alt="ícone de loading" />
+                  ) : (
+                    <>
+                      <span>{selectedStatus}</span>
+                      <Pencil className="editPencil" size={24} color="#fff" />
+                    </>
+                  )}
+                </div>
+                {isOpen && (
+                  <ul className="statusOptions">
+                    {statusName.map((status, index) => (
+                      <li
+                        style={
+                          status == selectedStatus
+                            ? {
+                                background: cardDetails.styleColor,
+                                color: "#fff",
+                                fontWeight: "600",
+                              }
+                            : {}
+                        }
+                        key={index}
+                        className="statusOption"
+                        onClick={() =>
+                          handleOptionClick(status, cardDetails.id)
+                        }
+                      >
+                        {status}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
             <div className="divDetail divDetailData">
@@ -113,7 +200,7 @@ function SectionTwoDetails({
           </MapContainer>
         </div>
         <div className="itemDetailThree itemDetail">
-          <button className="buttonEdit iconCRUD">
+          <button onClick={openModal} className="buttonEdit iconCRUD">
             <Pencil size={24} color="#fff" />
           </button>
           <button
@@ -137,8 +224,18 @@ function SectionTwoDetails({
           return <HistoryCard key={index} history={history} />;
         })}
       </section>
+      <InputsModal
+        closeModal={closeModal}
+        showModal={showModal}
+        createCard={createCard}
+        loading={loading}
+        setLoading={setLoading}
+        isEdit={true}
+        cardDetails={cardDetails}
+        updateCard={updateCard}
+      />
     </main>
   );
 }
 
-export default SectionTwoDetails;
+export default forwardRef(SectionTwoDetails);

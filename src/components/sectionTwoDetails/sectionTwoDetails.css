@@ -130,7 +130,7 @@
   border: 1px solid #d9d9d9;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 1.25rem .7rem;
+  padding: 1.25rem 0.7rem;
 }
 
 .statusCard {
@@ -140,11 +140,45 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-weight: 700;
   gap: 0.5rem;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+
+  select {
+    border-radius: 11px;
+    border: none;
+    outline: none;
+
+    height: 100%;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    &:active {
+      border: none;
+    }
+  }
+}
+
+.statusDropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.statusMain {
+  border-radius: 11px;
+  background: "#14C3A4";
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -156,7 +190,32 @@
     &:hover {
       transform: scale(1.09);
     }
-  } 
+  }
+}
+
+.statusOptions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.selectOption {
+  font-weight: 600;
+}
+
+.statusOption {
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 
 .small-map {

@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import "./header.css";
 import iconAdmin from "../../assets/iconAdmin.svg";
 import { Search, HeartHandshake } from "lucide-react";
 
-function Header() {
+function Header({searchActive}) {
   return (
     <header>
       <div className="logo">
@@ -12,7 +13,7 @@ function Header() {
       <div className="secondarySection">
         <div className="searchField">
           <Search className="iconSearch" size={18} />
-          <input type="text" />
+          <input onChange={searchActive} type="text" />
         </div>
         <div className="profileAdmin">
           <img src={iconAdmin} alt="" draggable="false" />

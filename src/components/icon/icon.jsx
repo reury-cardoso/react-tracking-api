@@ -1,5 +1,12 @@
 /* eslint-disable react/prop-types */
-import { HardDriveDownload, FolderClock,  CircleCheck, MapPinCheck, TextSearch, TicketX} from "lucide-react";
+import {
+  HardDriveDownload,
+  FolderClock,
+  CircleCheck,
+  MapPinCheck,
+  TextSearch,
+  TicketX,
+} from "lucide-react";
 
 function Icon({ name, color }) {
   switch (name) {
