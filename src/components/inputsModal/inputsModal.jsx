@@ -54,11 +54,11 @@ function InputsModal({
       if (!create) {
         return;
       }
-    }
 
-    setPersonalName("");
-    setTypeHelp("");
-    setAddress("");
+      setPersonalName("");
+      setTypeHelp("");
+      setAddress("");
+    }
   }
 
   useEffect(() => {
