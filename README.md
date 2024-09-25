@@ -3,6 +3,10 @@ md
 
 O **HelpTracking** é um sistema desenvolvido para facilitar o monitoramento de auxílios, como assistência educacional e de saúde. O sistema foi criado como parte do Módulo 05 do programa **Programadores do Amanhã**.
 
+<p align="center">
+  <img alt="projeto" src=".github/preview.jpg" width="100%">
+</p>
+
 ## 🖥 Deploy
 
 Você pode acessar a aplicação em funcionamento através deste link:  
@@ -80,7 +84,7 @@ npm install
 npm run dev
 ```
 
-O frontend estará disponível em `http://localhost:3001`.
+O frontend estará disponível na URL local informada pelo terminal.
 
 ## Endpoints da API
 
