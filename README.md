@@ -4,7 +4,7 @@ md
 O **HelpTracking** é um sistema desenvolvido para facilitar o monitoramento de auxílios, como assistência educacional e de saúde. O sistema foi criado como parte do Módulo 05 do programa **Programadores do Amanhã**.
 
 <p align="center">
-  <img alt="projeto" src=".github/preview.jpg" width="100%">
+  <img alt="projeto" src=".github/preview.png" width="100%">
 </p>
 
 ## 🖥 Deploy
